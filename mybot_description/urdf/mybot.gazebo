@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<!--  This is the gazebo plugin file that connect the whole robot with diffrential drive plugin and each link with its plugin so we will use the following 
+
+1:Diffrential Drive 
+2:Kinect 
+3:IMU
+4:adding some colors and material for links
+ /-->
+
+<robot>
+
+<!--  ++++++++++++++++++ Diff drive plugin++++++++++++++++++          /-->
+
+  <gazebo>
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <legacyMode>false</legacyMode>
+      <alwaysOn>true</alwaysOn>
+      <updateRate>20</updateRate>
+      <leftJoint>left_wheel_hinge</leftJoint>
+      <rightJoint>right_wheel_hinge</rightJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.1</wheelDiameter>
+      <torque>20</torque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>chassis</robotBaseFrame>
+
+    
+</plugin>
+  </gazebo>
+<!--  +++++++++++++Chassis Orange color++++++++++++++++          /-->
+
+  <gazebo reference="chassis">
+    <material>Gazebo/Orange</material>
+  </gazebo>
+
+<!--  ++++++++++++++++Left wheel Blue Color+++++++++++++++++++          /-->
+  <gazebo reference="left_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+<!--  +++++++++++++++Right wheel Blue Color+++++++++++++++++          /-->
+  <gazebo reference="right_wheel">
+    <material>Gazebo/Blue</material>
+  </gazebo>
+
+
+<!--  ++++++++++++++++++IMU plugin++++++++++++++++++          /-->
+<!--gazebo reference="IMU">
+ 
+<gravity>true</gravity>
+    <sensor name="imu_sensor" type="imu">
+      <always_on>true</always_on>
+      <update_rate>100</update_rate>
+      <visualize>true</visualize>
+      <topic>__default_topic__</topic>
+      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+        <topicName>imu</topicName>
+        <bodyName>IMU</bodyName>
+        <updateRateHZ>10.0</updateRateHZ>
+        <gaussianNoise>0.2</gaussianNoise>
+        <xyzOffset>0 0 0</xyzOffset>
+        <rpyOffset>0 0 0</rpyOffset>
+        <frameName>IMU</frameName>
+      </plugin>
+      <pose>0 0 0 0 0 0</pose>
+    </sensor>
+
+</gazebo-->
+
+<!--  ++++++++++++++++++Kinect Plugin+++++++++++++++++++          /-->
+
+<gazebo reference="camera_link">
+    <sensor type="depth" name="camera">
+        <always_on>1</always_on>
+        <visualize>true</visualize>             
+        <camera>
+            <horizontal_fov>1.047</horizontal_fov>  
+            <image>
+                <width>640</width>
+                <height>480</height>
+                <format>R8G8B8</format>
+            </image>
+            <depth_camera>
+
+            </depth_camera>
+            <clip>
+                <near>0.1</near>
+                <far>100</far>
+            </clip>
+        </camera>
+             <plugin name="camera_controller" filename="libgazebo_ros_openni_kinect.so">
+             <alwaysOn>true</alwaysOn>
+                <updateRate>10.0</updateRate>
+                <cameraName>camera</cameraName>
+                <frameName>kinect_optical</frameName> <!-- NOte the frame name this will project the image in a virtual link not kinect link but kinect_optical link/-->                  
+            <imageTopicName>rgb/image_raw</imageTopicName>
+            <depthImageTopicName>depth/image_raw</depthImageTopicName>
+            <pointCloudTopicName>depth/points</pointCloudTopicName>
+            <cameraInfoTopicName>rgb/camera_info</cameraInfoTopicName>              
+            <depthImageCameraInfoTopicName>depth/camera_info</depthImageCameraInfoTopicName>            
+            <pointCloudCutoff>0.4</pointCloudCutoff>                
+                <hackBaseline>0.07</hackBaseline>
+                <distortionK1>0.0</distortionK1>
+                <distortionK2>0.0</distortionK2>
+                <distortionK3>0.0</distortionK3>
+                <distortionT1>0.0</distortionT1>
+                <distortionT2>0.0</distortionT2>
+            <CxPrime>0.0</CxPrime>
+            <Cx>0.0</Cx>
+            <Cy>0.0</Cy>
+            <focalLength>0.0</focalLength>
+            </plugin>
+    </sensor>
+  </gazebo >
+
+
+<!--  ++++++++++++++++++Extras ++++++++++++++++++          /-->
+
+
+<!--gazebo reference="kinect" >
+  <plugin name="camera" filename="libDepthCameraPlugin.so">
+    <baseline>0.2</baseline>
+    <alwaysOn>true</alwaysOn>
+    <updateRate>10.0</updateRate>
+    <cameraName>camera_ir</cameraName>
+    <imageTopicName>/camera/depth/image_raw</imageTopicName>
+    <cameraInfoTopicName>/camera/depth/camera_info</cameraInfoTopicName>
+    <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+    <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
+    <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+    <frameName>kinect_frame</frameName>
+    <pointCloudCutoff>0.5</pointCloudCutoff>
+    <distortionK1>0.00000001</distortionK1>
+    <distortionK2>0.00000001</distortionK2>
+    <distortionK3>0.00000001</distortionK3>
+    <distortionT1>0.00000001</distortionT1>
+    <distortionT2>0.00000001</distortionT2>
+    <CxPrime>0</CxPrime>
+    <Cx>0</Cx>
+    <Cy>0</Cy>
+    <focalLength>0</focalLength>
+    <hackBaseline>0</hackBaseline>
+  </plugin>
+</gazebo-->
+
+
+
+
+<!--  +++++++++++++++++++++++Camera +++++++++++          /-->
+
+
+  <!--gazebo reference="camera">
+    <material>Gazebo/Green</material>
+    <sensor type="camera" name="camera1">
+      <update_rate>30.0</update_rate>
+      <camera name="head">
+        <horizontal_fov>1.3962634</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>800</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <alwaysOn>true</alwaysOn>
+        <updateRate>0.0</updateRate>
+        <cameraName>mybot/camera1</cameraName>
+        <imageTopicName>image_raw</imageTopicName>
+        <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+        <frameName>camera</frameName>
+        <hackBaseline>0.07</hackBaseline>
+        <distortionK1>0.0</distortionK1>
+        <distortionK2>0.0</distortionK2>
+        <distortionK3>0.0</distortionK3>
+        <distortionT1>0.0</distortionT1>
+        <distortionT2>0.0</distortionT2>
+      </plugin>
+    </sensor>
+  </gazebo-->
+
+<!--  +++++++++++++++++++ Hokuyo laser ++++++++++++++++          /-->
+
+  <!-- hokuyo -->
+    <!--gazebo reference="hokuyo">
+  <sensor type="gpu_ray" name="head_hokuyo_sensor">
+  <pose>0 0 0 0 0 0</pose>
+  <visualize>true</visualize>
+  <update_rate>40</update_rate>
+  <ray>
+    <scan>
+      <horizontal>
+        <samples>720</samples>
+        <resolution>1</resolution>
+        <min_angle>-1.570796</min_angle>
+        <max_angle>1.570796</max_angle>
+      </horizontal>
+    </scan>
+    <range>
+      <min>0.1</min>
+      <max>8.0</max>
+      <resolution>0.01</resolution>
+    </range>
+    <noise>
+      <type>Gaussian</type>
+      <mean>0.0</mean>
+      <stddev>0.01</stddev>
+    </noise>
+  </ray>
+  <plugin name="gazebo_ros_head_hokuyo_controller" filename="libgazebo_ros_gpu_laser.so">
+    <topicName>/mybot/laser/scan</topicName>
+    <frameName>/hokuyo</frameName>
+  </plugin>
+</sensor>
+    </gazebo-->
+
+</robot>

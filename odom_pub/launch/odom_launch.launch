@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<launch>
+
+  
+<!-- publishing odometry -->
+  <node name="odom_pub" pkg="odom_pub" type="odom_pub_node"/>
+
+<!-- Rosserial node -->
+  <!--node name="rosserial" pkg="rosserial_python" type="serial_node.py"/-->
+
+<!-- Show in Rviz   -->
+  <node name="rviz" pkg="rviz" type="rviz"/>
+
+<!-- Teleop node   -->
+  <node name="teleop" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py"/>
+
+
+</launch>

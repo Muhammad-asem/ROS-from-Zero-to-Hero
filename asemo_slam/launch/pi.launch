@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+<!--  kinect launch -->
+<include file="$(find freenect_launch)/launch/freenect.launch"/>
+
+<!--  depth to laser scan -->
+<node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" > 
+<param name="output_frame_id" value="camera_depth_frame" />
+  <remap from="image" to="/camera/depth/image_raw"/>
+</node>
+
+
+
+<!--  serial node -->
+<node name="serial_arduino" pkg="rosserial_python" type="serial_node.py" > 
+<param name="port" value="$(arg port)"/>
+
+</node>
+
+
+
+
+</launch>
