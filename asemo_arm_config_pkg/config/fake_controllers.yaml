@@ -1,9 +1,0 @@
-controller_list:
-  - name: fake_Asemo_controller
-    joints:
-      - shoulder
-      - elbow
-      - gripper
-  - name: fake_hand_controller
-    joints:
-      - gripper
