@@ -74,7 +74,7 @@ Written by Muhammad Asem m7mad3asem@gmail.com
              <alwaysOn>true</alwaysOn>
              <updateRate>10.0</updateRate>
              <cameraName>camera</cameraName>
-             <frameName>camera_link</frameName> 
+             <frameName>kinect_optical</frameName> <!-- Note the frame name!! It is a FAKE rotated frame to adapt the Computer vision  frame 	convention"z axis for front" with the default  xyz "z axis for up" convention"  /-->
              <imageTopicName>rgb/image_raw</imageTopicName>
              <depthImageTopicName>depth/image_raw</depthImageTopicName>
              <pointCloudTopicName>depth/points</pointCloudTopicName>

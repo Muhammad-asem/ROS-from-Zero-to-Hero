@@ -235,4 +235,19 @@ It models: 1-Chassis with Caster Wheel 2-Left wheel 3-right Wheel  4-Kinect /-->
 
 
 
+<!--  Kinect Optical Link and joints   /-->
+
+<joint name="kinect_optical_joint" type="fixed">
+
+<origin xyz="0 0 0" rpy="-1.5707 0 -1.5707"/> <!-- To invert the coordinates from image convention (Z is forward) to normal xyz /-->
+<parent link="camera_link"/>
+<child link="kinect_optical"/>
+</joint>
+
+<!--Virtual link to project the images to, and then flip it to us as its joint is flipped  /-->
+<link name="kinect_optical">
+</link>
+
+
+
 </robot>
