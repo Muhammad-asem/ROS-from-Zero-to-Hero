@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<launch>
+
+<include file="$(find gazebo_pkg)/launch/mybot_world.launch"/>
+
+
+<include file="$(find freenect_launch)/launch/freenect.launch"/>
+
+<include file="$(find mybot_description)/launch/mybot_rviz.launch"/>
+
+<!--this line is included in mybot_rviz.launch file param name="robot_description" command="$(find xacro)/xacro.py '$(find mybot_description)/urdf/mybot.xacro'"/-->
+
+
+<!--  depth image to laser scan -->
+
+<node name="depthimage_to_laserscan" pkg="depthimage_to_laserscan" type="depthimage_to_laserscan" > 
+<param name="output_frame_id" value="camera_depth_frame" />
+<remap from="image" to="/camera/depth/image_raw"/>
+</node>
+
+
+<!-- publishing odometry from hardware -->
+
+<node name="odom_pub" pkg="odom_pub" type="odom_pub_node"/>
+
+<!-- open the rosserial from other terminal and select the right serial port and baud rate -->
+
+
+<include file="$(find mybot_nav)/launch/mybot_teleop.launch"/>
+
+
+
+
+<!-- gmapping node -->
+<include file="$(find mybot_nav)/launch/gmapping.launch"/>
+
+
+</launch>
+
+
+
+
+
+
+
+
+
