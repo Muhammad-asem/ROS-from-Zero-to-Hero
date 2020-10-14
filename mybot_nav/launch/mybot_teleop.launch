@@ -2,14 +2,10 @@
 <launch>
   <!-- turtlebot_teleop_key already has its own built in velocity smoother -->
   <node pkg="turtlebot3_teleop" type="turtlebot3_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
-    <param name="scale_linear" value="0.5" type="double"/>
-    <param name="scale_angular" value="1.5" type="double"/>
+    
     <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel"/>
   </node>
 
-<!--node pkg="turtlesim" type="turtle_teleop_key" name="turtle_teleop_keyboard"  output="screen">
-    <remap from="turtle1/cmd_vel" to="cmd_vel"/>
-  </node-->
 
 </launch>
 

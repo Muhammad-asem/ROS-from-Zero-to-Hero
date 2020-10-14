@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <launch>
-  <master auto="start"/>
+  
   <param name="/use_sim_time" value="true"/>
   <!--- Run gmapping -->
   <node pkg="gmapping" name="slam_gmapping" type="slam_gmapping" output="screen">
@@ -9,7 +9,7 @@
     <param name="xmax" value="10"/>
     <param name="ymin" value="-10"/>
     <param name="ymax" value="10"/>
-    <!--remap from="scan" to="mybot/laser/scan"/-->
+    
     <param name="base_frame" value="chassis" />
 
     <param name="linearUpdate" value="0.5"/>
